@@ -11,7 +11,7 @@ beforeAll(async () => {
   await Promise.all(blogObjects.map(blog => blog.save()))
 })
 
-describe('GET /api/blogs', () => {
+describe('GET /api/blogs', async () => {
 
   test('returns the initial blogs as json', async () => {
     const blogsInDatabase = await blogsInDb()
@@ -23,9 +23,9 @@ describe('GET /api/blogs', () => {
 
     expect(response.body.length).toBe(initialBlogs.length)
 
-    const returnedTitles = response.body.map(r => r.title)
+    const titles = response.body.map(r => r.title)
     blogsInDatabase.forEach(blog => {
-      expect(returnedTitles).toContain(blog.title)
+      expect(titles).toContain(blog.title)
     })
   })
 })

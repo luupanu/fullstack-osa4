@@ -7,7 +7,7 @@ blogRouter.delete('/:id', async (request, response) => {
     response.status(204).end()
   } catch (error) {
     console.log(error)
-    response.status(400).send({ error: 'malformatted id' })
+    response.status(400).json({ error: 'malformatted id' })
   }
 })
 
@@ -17,7 +17,7 @@ blogRouter.get('/', async (request, response) => {
     response.json(blogs)
   } catch (error) {
     console.log(error)
-    response.status(500).send({ error: 'something went wrong!' })
+    response.status(500).json({ error: 'something went wrong!' })
   }
 })
 
@@ -25,7 +25,7 @@ blogRouter.post('/', async (request, response) => {
   try {
     const blog = new Blog(request.body)
     if (blog.title === undefined || blog.url === undefined) {
-      return response.status(400).send({ error: 'title or url missing' })
+      return response.status(400).json({ error: 'title or url missing' })
     }
     if (blog.likes === undefined) {
       blog.likes = 0
@@ -34,7 +34,7 @@ blogRouter.post('/', async (request, response) => {
     response.status(201).json(savedBlog)
   } catch (error) {
     console.log(error)
-    response.status(500).send({ error: 'something went wrong!' })
+    response.status(500).json({ error: 'something went wrong!' })
   }
 })
 
@@ -50,7 +50,7 @@ blogRouter.put('/:id', async (request, response) => {
     response.status(200).end()
   } catch (error) {
     console.log(error)
-    response.status(400).send({ error: 'malformatted id' })
+    response.status(400).json({ error: 'malformatted id' })
   }
 })
 
